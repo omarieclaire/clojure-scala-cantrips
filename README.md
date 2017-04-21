@@ -179,8 +179,8 @@ This is a method that takes an `int` and doesn’t return back a value. This is 
 
 ## Class methods
 
-Next up let’s have a look at class methods. Our study case is the class below;
-
+Next up let’s have a look at class methods. Our study case is the class below [class-methods.clojure](src/class_methods/clojure.clj);
+*[class-methods.scala](src/class_methods/scala.scala)*
 ```scala
 class TestClass{
   def method1: Int = 1
@@ -194,6 +194,7 @@ class TestClass{
 ```
 
 This class gives us the interface below;
+*`make show-class-methods`*
 ```java
 public class clojure.scala.interop.class.methods.TestClass {
   public int method1();
@@ -211,7 +212,7 @@ Another detail is that defining a parameterless method in scala with or without 
 
 For the other methods only difference is that they expect parameters. The code below demonstrates how we invoke all of these methods;
 
-[class-methods.clojure](src/class_methods/clojure.clj)
+*[class-methods.clojure](src/class_methods/clojure.clj)*
 ```clojure
 (let [instance (TestClass.)]
   (println (.method1 instance))    ; prints 1
