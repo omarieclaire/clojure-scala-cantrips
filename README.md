@@ -259,7 +259,7 @@ Scala doesn’t have static methods, its way of providing a similar functionalit
 #### A note on the companion objects
 Before we move on to the following topic, there is an interesting point I'd like to draw attention on.
 
-The companion objects in scala do not exist without their classes. In this example we see this case manifesting itself. Even though the `TestClass` object is defined without a class, its java interface yields two classes, `TestClass` and `TestClass$`. Another interesting point is that the generated java class `TestClass` has no constructors, not even a private one.
+**The companion objects in scala do not exist without their classes.** In this example we see this case manifesting itself. Even though the `TestClass` object is defined without a class, its java interface yields two classes, `TestClass` and `TestClass$`. Another interesting point is that the generated java class `TestClass` has no constructors, not even a private one.
 
 `javap -private src/clojure/scala/interop/companion/object/TestClass.class` yields the interface below ([-private flag](http://docs.oracle.com/javase/1.5.0/docs/tooldocs/windows/javap.html) is used to show private members);
 
