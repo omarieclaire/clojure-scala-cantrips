@@ -405,12 +405,84 @@ Naturally the java signature of the `sum` method doesn’t give any insight abou
 
 As demonstrated above the clojure way of accessing the default value of a parameter is by calling its generated method. This is probably not more convenient than using a hardcoded parameter, however we need to keep in mind that the default values that are provided by a library may change over time.
 
+## Case classes
+
+[Case classes](http://docs.scala-lang.org/tutorials/tour/case-classes.html) are another handy tool that is commonly used in scala codebases. Scala provides a bunch of features to case classes for free. These include but not limited to; default apply and unapply methods, immutability, hashCode and equals implementations. Let’s inspect the java api of a case class to get the full list;
+
+*[case-classes.scala](src/case_classes/scala.scala)*
+```scala
+case class TestClass(a: Int, b: Int)
+```
+
+The case class above yields the java interface below;
+
+*`make show-case-classes`*
+```java
+public final class clojure.scala.interop.case.classes.TestClass$ extends scala.runtime.AbstractFunction2<java.lang.Object, java.lang.Object, clojure.scala.interop.case.classes.TestClass> implements scala.Serializable {
+  public static clojure.scala.interop.case.classes.TestClass$ MODULE$;
+  public static {};
+  public final java.lang.String toString();
+  public clojure.scala.interop.case.classes.TestClass apply(int, int);
+  public scala.Option<scala.Tuple2<java.lang.Object, java.lang.Object>> unapply(clojure.scala.interop.case.classes.TestClass);
+  public java.lang.Object apply(java.lang.Object, java.lang.Object);
+}
+
+public class clojure.scala.interop.case.classes.TestClass implements scala.Product,scala.Serializable {
+  public static scala.Option<scala.Tuple2<java.lang.Object, java.lang.Object>> unapply(clojure.scala.interop.case.classes.TestClass);
+  public static clojure.scala.interop.case.classes.TestClass apply(int, int);
+  public static scala.Function1<scala.Tuple2<java.lang.Object, java.lang.Object>, clojure.scala.interop.case.classes.TestClass> tupled();
+  public static scala.Function1<java.lang.Object, scala.Function1<java.lang.Object, clojure.scala.interop.case.classes.TestClass>> curried();
+  public int a();
+  public int b();
+  public clojure.scala.interop.case.classes.TestClass copy(int, int);
+  public int copy$default$1();
+  public int copy$default$2();
+  public java.lang.String productPrefix();
+  public int productArity();
+  public java.lang.Object productElement(int);
+  public scala.collection.Iterator<java.lang.Object> productIterator();
+  public boolean canEqual(java.lang.Object);
+  public int hashCode();
+  public java.lang.String toString();
+  public boolean equals(java.lang.Object);
+  public clojure.scala.interop.case.classes.TestClass(int, int);
+}
+```
+
+For the sake of brevity, this documentation will focus on the parts that are interesting for a clojure consumer. The interface a case class provides, mostly contains sugar methods that works well in a scala codebase. Naturally in a clojure codebase this interface does not bring many benefits. Some examples to these are;
+* `apply`: automatically invoked in scala but not in clojure. In clojure code calling the apply method is not any simpler than calling the constructor or any other method, therefore doesn’t bring any benefits.
+* `unapply`: useful for pattern matching in scala, not applicable to clojure.
+* `copy` : handy when the default parameter values are supported, doesn’t bring any benefits in clojure.
+
+Let’s have a look at the code below to see what parts of this api we can make use of from clojure code;
+
+*[case-classes.clojure](src/case_classes/clojure.clj)* *`make run-case-classes`*
+```clojure
+(let [instance (TestClass. 1 2)
+      another-instance (TestClass/apply 1 2)]
+
+  (println (.a instance)) ; prints 1
+  (println (.b instance)) ; prints 2
+
+  (println (.toString instance))         ; prints TestClass(1,2)
+  (println (.toString another-instance)) ; prints TestClass(1,2)
+
+  (println (str instance)) ; prints TestClass(1,2)
+
+  (println (.equals instance another-instance)) ; prints true
+  (println (= instance another-instance))))     ; prints true
+```
+
+The code above demonstrates the usage of `toString` and `equals` methods. The interface a case class yields has few methods that can be leveraged in a clojure consumer. However the greater benefit of a case class is being an immutable [data transfer object](https://martinfowler.com/eaaCatalog/dataTransferObject.html)(*obligatory martin fowler link!*). And we can benefit from this in the clojure codebases.
+
+
 
 
 TODO:
 * Mention versions 
 * mention deps `lein` `scalac`
 * fix n-ary-constructorSSss add plural
+* fix prints stuff
 
 
 

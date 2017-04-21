@@ -57,3 +57,9 @@ show-default-arguments: compile
 
 run-default-arguments:
 	lein run -m default-arguments.clojure
+
+show-case-classes: compile
+	javap src/clojure/scala/interop/case/classes/*.class
+
+run-case-classes:
+	lein run -m case-classes.clojure
