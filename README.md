@@ -224,9 +224,9 @@ public class clojure.scala.interop.class.methods.TestClass {
 
 So far we indulged ourselves with the fundamental concepts that easily map to java structures. Let’s get to the things where scala sets itself apart from java.
 
-## Objects
+## Companion objects
 
-Objects are one of the useful tools of scala. Let’s see how they manifest themselves in Java code. The object below;
+Companion objects are one of the useful tools of scala. Let’s see how they manifest themselves in Java code. The object below;
 
 *[objects.scala](src/objects/scala.scala)*
 ```scala
@@ -235,7 +235,7 @@ object TestClass
 
 Yields the java interface below;
 
-*`make show-objects`*
+*`make show-companion-object`*
 ```java
 public final class clojure.scala.interop.object.TestClass$ {
   public static clojure.scala.interop.object.TestClass$ MODULE$;
@@ -256,7 +256,26 @@ Scala doesn’t have static methods, its way of providing a similar functionalit
   (println singleton-instance)) ; #object[clojure.scala.interop.objects.TestClass$]
 ```
 
-ADD SIDE NOT CONSTRUCUTOR
+###### A not on the companion objects
+Before we move on to the following topic, there is an interesting point I'd like to draw attention on.
+
+The companion objects in scala do not exist without their classes. In this example we see this case manifesting itself. Even though the `TestClass` companion object is defined without a class, its java interface yields two classes, `TestClass` and `TestClass$`. Another interesting point is that the generated java class `TestClass` has no constructors, not even a private one.
+
+`javap -private src/clojure/scala/interop/companion/object/TestClass.class` yields the interface below ([-private flag](http://docs.oracle.com/javase/1.5.0/docs/tooldocs/windows/javap.html) is used to show private members);
+
+```java
+public final class clojure.scala.interop.objects.TestClass {
+}
+```
+
+Trying to instantiate the `TestClass` without any arguments yields the error below;
+```bash
+Caused by: java.lang.IllegalArgumentException: No matching ctor found for class clojure.scala.interop.objects.TestClass
+``` 
+
+This shows that even the [java default constructor](https://docs.oracle.com/javase/tutorial/java/javaOO/constructors.html) is not provided to this class. I don't have knowledge on the reasoning behind this and it is out of the scope of this documentation. *However I am happy to hear if you know more about this.*
+
+
 
 
 

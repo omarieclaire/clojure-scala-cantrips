@@ -34,8 +34,8 @@ show-class-methods: compile
 run-class-methods:
 	lein run -m class-methods.clojure
 
-show-objects: compile
-	javap src/clojure/scala/interop/objects/*.class
+show-companion-object: compile
+	javap src/clojure/scala/interop/companion/object/*.class
 
-run-objects:
-	lein run -m objects.clojure
+run-companion-object:
+	lein run -m companion-object.clojure
