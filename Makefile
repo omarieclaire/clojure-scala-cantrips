@@ -51,3 +51,9 @@ show-apply-method: compile
 
 run-apply-method:
 	lein run -m apply-method.clojure
+
+show-default-arguments: compile
+	javap src/clojure/scala/interop/default/arguments/*.class
+
+run-default-arguments:
+	lein run -m default-arguments.clojure

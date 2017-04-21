@@ -370,6 +370,41 @@ While scala provides a sugar syntax for invoking the apply method, for a consume
   (println instance-via-apply))) ; prints object[clojure.scala.interop.apply.method.TestClass
 ```
 
+## Default arguments
+
+Another feature that is characteristic to scala is [default parameter values](http://docs.scala-lang.org/tutorials/tour/default-parameter-values.html). Given the `sum` method of the class below;
+
+*[default-arguments.scala](src/default_arguments/scala.scala)*
+```scala
+class TestClass {
+  def sum(a: Int, b: Int = 10): Int = a + b
+}
+```
+
+We observe that it yields the java interface below;
+
+*`make show-default-arguments`*
+```java
+public class clojure.scala.interop.default.arguments.TestClass {
+  public int sum(int, int);
+  public int sum$default$2();
+  public clojure.scala.interop.default.arguments.TestClass();
+}
+```
+
+Naturally the java signature of the `sum` method doesn’t give any insight about the default parameter value we are providing. However there is a parameterless method curiously named `sum$default$2`. Let’s invoke it;
+
+*[default-arguments.clojure](src/default_arguments/clojure.clj)* *`make run-default-arguments`*
+```clojure
+(let [instance (TestClass.)
+      default-argument (.sum$default$2 instance)]
+  (println default-argument)                      ;prints 10
+  (println (.sum instance 30 40))                 ;prints 70
+  (println (.sum instance 30 default-argument)))) ;prints 40
+```
+
+As demonstrated above the clojure way of accessing the default value of a parameter is by calling its generated method. This is probably not more convenient than using a hardcoded parameter, however we need to keep in mind that the default values that are provided by a library may change over time.
+
 
 
 TODO:
