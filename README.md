@@ -336,9 +336,9 @@ Looking at the interface above, there are two ways of accessing the provided fun
 
 
 TODO:
-Mention versions 
-mention deps `lein` `scalac`
-fix n-ary-constructorSSsssss add plural
+* Mention versions 
+* mention deps `lein` `scalac`
+* fix n-ary-constructorSSss add plural
 
 
 
