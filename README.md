@@ -179,7 +179,7 @@ This is a method that takes an `int` and doesn’t return back a value. This is 
 
 ## Class methods
 
-Next up let’s have a look at class methods. Our study case is the class below [class-methods.clojure](src/class_methods/clojure.clj);
+Next up let’s have a look at class methods. Our study case is the class below;
 
 *[class-methods.scala](src/class_methods/scala.scala)*
 ```scala
@@ -208,11 +208,7 @@ public class clojure.scala.interop.class.methods.TestClass {
 }
 ```
 
-`method1` and `method2` are parameterless methods, therefore invoking them is not different than how we access the `val`s. [As we noted above](https://github.com/grandbora/clojure-scala-cantrips#accessing-the-immutable-instance-fields) `val`s are turned into parameterless java methods.
-
-Another detail is that defining a parameterless method in scala with or without parentheses does not change the signature of the java method it yields. An example to that is the `method1` and `method2` methods. They both yield the exact same signature.
-
-For the other methods only difference is that they expect parameters. The code below demonstrates how we invoke all of these methods;
+`method1` and `method2` are parameterless methods, therefore invoking them is not different than how we access the `val`s. [As we noted above](https://github.com/grandbora/clojure-scala-cantrips#accessing-the-immutable-instance-fields) `val`s are turned into parameterless java methods. For the other methods only difference is that they expect parameters. The code below demonstrates how we invoke these methods;
 
 *[class-methods.clojure](src/class_methods/clojure.clj)*
 ```clojure
@@ -231,30 +227,6 @@ For the other methods only difference is that they expect parameters. The code b
 TODO:
 Mention versions 
 mention deps `lein` `scalac`
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
 
 
 
