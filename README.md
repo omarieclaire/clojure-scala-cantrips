@@ -275,14 +275,70 @@ Caused by: java.lang.IllegalArgumentException: No matching ctor found for class 
 
 This shows that even the [default java constructor](https://docs.oracle.com/javase/tutorial/java/javaOO/constructors.html) is not provided to this class. I don't have knowledge on the reasoning behind this and it is out of the scope of this documentation. *However I am happy to hear if you know more about this.*
 
+## Class members of companion objects
 
+Now that we know how to access the instance of an object, let’s investigate how we can run operations on the java interface it provides. Let’s consider the companion object below;
+
+*[object-members.scala](src/object_members/scala.scala)*
+```scala
+object TestClass {
+  val immutableField = 0
+  var mutableField = 1
+  def inc(x: Int): Int = x + 1
+}
+```
+
+The object above yields the java interface below;
+
+*`make show-object-members`*
+```java
+public final class clojure.scala.interop.object.members.TestClass$ {
+  public static clojure.scala.interop.object.members.TestClass$ MODULE$;
+  public static {};
+  public int immutableField();
+  public int mutableField();
+  public void mutableField_$eq(int);
+  public int inc(int);
+}
+
+public final class clojure.scala.interop.object.members.TestClass {
+  public static int inc(int);
+  public static void mutableField_$eq(int);
+  public static int mutableField();
+  public static int immutableField();
+}
+```
+
+Looking at the interface above, there are two ways of accessing the provided functionality; either using the static methods on `TestClass` or using the instance methods on `TestClass$`. As far as I tested either way results in identical outcomes. Even the mutable state is shared between these two classes, which would be the expectation of a consumer who is oblivious to the internals of scala. This is demonstrated below;
+
+*[object-members.clojure](src/object_members/clojure.clj)* *`make run-object-members`*
+```clojure
+(let [object-instance (TestClass$/MODULE$)]
+
+  (println (TestClass/inc 1))        ;prints 2
+  (println (.inc object-instance 1)) ;prints 2
+
+  (println (TestClass/immutableField))        ;prints 0
+  (println (.immutableField object-instance)) ;prints 0
+
+  (println (TestClass/mutableField))          ;prints 1
+  (println (.mutableField object-instance))   ;prints 1
+
+  (TestClass/mutableField_$eq 3)              ;sets the mutable value to 3 through static method
+  (println (TestClass/mutableField))          ;prints 3
+  (println (.mutableField object-instance))   ;prints 3
+
+  (.mutableField_$eq object-instance 4)       ;sets the mutable value to 4 through object-instance method
+  (println (TestClass/mutableField))          ;prints 4
+  (println (.mutableField object-instance))   ;prints 4
+```
 
 
 
 TODO:
 Mention versions 
 mention deps `lein` `scalac`
-
+fix n-ary-constructorSSsssss add plural
 
 
 

@@ -39,3 +39,9 @@ show-companion-object: compile
 
 run-companion-object:
 	lein run -m companion-object.clojure
+
+show-object-members: compile
+	javap src/clojure/scala/interop/object/members/*.class
+
+run-object-members:
+	lein run -m object-members.clojure
