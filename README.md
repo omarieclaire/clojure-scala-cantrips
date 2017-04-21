@@ -164,7 +164,7 @@ Again here defining a field in the constructor or in the class body doesn’t ma
     (println attr2))  ; 2
 ```
 
-What about mutating these fields? You probably noticed this weird named methods (we’ll have plenty of these!);
+What about mutating these fields? You probably noticed these weird named methods (we’ll have plenty of these!);
 ```java
 public void attr1_$eq(int);
 ```
@@ -177,8 +177,86 @@ This is a method that takes an `int` and doesn’t return back a value. This is 
     (println (.attr1 instance)))) ; 99
 ```
 
+## Class methods
+
+Next up let’s have a look at class methods. Our study case is the class below;
+
+```scala
+class TestClass{
+  def method1: Int = 1
+  def method2(): Int = 2
+  def inc(x: Int): Int = x + 1
+  def sum(x: Int, y:Int): Int = x + y
+  def sideEffect(x: Int, y:Int): Unit = {
+    println("does a side effect")
+  }
+}
+```
+
+This class gives us the interface below;
+```java
+public class clojure.scala.interop.class.methods.TestClass {
+  public int method1();
+  public int method2();
+  public int inc(int);
+  public int sum(int, int);
+  public void sideEffect(int, int);
+  public clojure.scala.interop.class.methods.TestClass();
+}
+```
+
+`method1` and `method2` are parameterless methods, therefore invoking them is not different than how we access the `val`s. [As we noted above](https://github.com/grandbora/clojure-scala-cantrips#accessing-the-immutable-instance-fields) `val`s are turned into parameterless java methods.
+
+Another detail is that defining a parameterless method in scala with or without parentheses does not change the signature of the java method it yields. An example to that is the `method1` and `method2` methods. They both yield the exact same signature.
+
+For the other methods only difference is that they expect parameters. The code below demonstrates how we invoke all of these methods;
+
+[class-methods.clojure](src/class_methods/clojure.clj)
+```clojure
+(let [instance (TestClass.)]
+  (println (.method1 instance))    ; prints 1
+  (println (.method2 instance))    ; prints 2
+  (println (.inc instance 2))      ; prints 3
+  (println (.sum instance 2, 3))   ; prints 5
+  (.sideEffect instance 2, 3)))    ; does a side effect
+```
+
+
+
 
 
 TODO:
 Mention versions 
 mention deps `lein` `scalac`
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+

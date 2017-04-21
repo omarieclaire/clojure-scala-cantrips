@@ -27,3 +27,9 @@ show-mutable-fields: compile
 
 run-mutable-fields:
 	lein run -m mutable-fields.clojure
+
+show-class-methods: compile
+	javap src/clojure/scala/interop/class/methods/TestClass.class
+
+run-class-methods:
+	lein run -m class-methods.clojure
