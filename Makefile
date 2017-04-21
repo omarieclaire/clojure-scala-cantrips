@@ -45,3 +45,9 @@ show-object-members: compile
 
 run-object-members:
 	lein run -m object-members.clojure
+
+show-apply-method: compile
+	javap src/clojure/scala/interop/apply/method/*.class
+
+run-apply-method:
+	lein run -m apply-method.clojure

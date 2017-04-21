@@ -333,6 +333,43 @@ Looking at the interface above, there are two ways of accessing the provided fun
   (println (.mutableField object-instance))   ;prints 4
 ```
 
+## The magic apply method
+
+One common pattern in scala is defining apply method(s) on the companion object. Most of the time these methods are used for constructing an instance of the class, the object they belong is accompanying. Let’s inspect an example of this pattern;
+
+*[apply-method.scala](src/apply_method/scala.scala)*
+```scala
+class TestClass(a: Int, b: Int)
+
+object TestClass {
+  def apply(x: Int): TestClass = new TestClass(x, x)
+}
+```
+
+The companion object above yields the java interface below;
+
+*`make show-apply-method`*
+```java
+public final class clojure.scala.interop.apply.method.TestClass$ {
+  public static clojure.scala.interop.apply.method.TestClass$ MODULE$;
+  public static {};
+  public clojure.scala.interop.apply.method.TestClass apply(int);
+}
+
+public class clojure.scala.interop.apply.method.TestClass {
+  public static clojure.scala.interop.apply.method.TestClass apply(int);
+  public clojure.scala.interop.apply.method.TestClass(int, int);
+}
+```
+
+While scala provides a sugar syntax for invoking the apply method, for a consumer written in cojure, apply method is just another static method defined on the class. Invocation of it is demonstrated below;
+
+*[apply-method.clojure](src/apply_method/clojure.clj)* *`make run-apply-method`*
+```clojure
+(let [instance-via-apply (TestClass/apply 4)]
+  (println instance-via-apply))) ; prints object[clojure.scala.interop.apply.method.TestClass
+```
+
 
 
 TODO:
