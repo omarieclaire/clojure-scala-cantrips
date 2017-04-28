@@ -264,8 +264,8 @@ public class clojure.scala.interop.class.methods.TestClass {
   (println (.method1 instance))    ; prints 1
   (println (.method2 instance))    ; prints 2
   (println (.inc instance 2))      ; prints 3
-  (println (.sum instance 2, 3))   ; prints 5
-  (.sideEffect instance 2, 3)))    ; does a side effect
+  (println (.sum instance 2 3))   ; prints 5
+  (.sideEffect instance 2 3)))    ; does a side effect
 ```
 
 ---------------
@@ -593,7 +593,6 @@ Hope this document was helpful to you.
 
 TODO:
 
-* remove commas from clojure code
 * fix n-ary-constructorSSss add plural
 * fix prints stuff
 * fix inconsistent titles/classnames/code examples
