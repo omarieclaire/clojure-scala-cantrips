@@ -3,7 +3,7 @@
 This document covers couple of tips and tricks on how to consume scala apis from a clojure codebase.
 
 ### Index
-  * [Intro](https://github.com/grandbora/clojure-scala-cantrips/blob/master/README.md#intro---lets-get-retarded)
+  * [Intro](https://github.com/grandbora/clojure-scala-cantrips/blob/master/README.md#intro---lets-get-started)
   * [Prerequisites](https://github.com/grandbora/clojure-scala-cantrips/blob/master/README.md#prerequisites)
   * [The primary constructor](https://github.com/grandbora/clojure-scala-cantrips/blob/master/README.md#the-primary-constructor)
   * [The n-ary constructors](https://github.com/grandbora/clojure-scala-cantrips/blob/master/README.md#the-n-ary-constructors)
@@ -55,19 +55,25 @@ java 1.8.0_92
 
 ## The primary constructor
 
-Instantiating regular scala classes is as straightforward as instantiating a java class. Given [this class](src/primary_constructor/scala.scala);
+Instantiating regular scala classes is as straightforward as instantiating a java class. The class below;
+
+*[primary-constructor.scala](src/primary_constructor/scala.scala)*
 ```scala
 class TestClass(param1: Int, param2: String)
 ```
 
-`make show-primary-constructor` generates the java api below ;
+generates the java api below;
+
+*`make show-primary-constructor`*
 ```java
 public class TestClass {
   public TestClass(int, java.lang.String);
 }
 ```
 
-And the clojure code to instantiate this class looks like [this](src/primary_constructor/clojure.clj);
+And the clojure code to instantiate this class looks like below;
+
+*[primary-constructor.clj](src/primary_constructor/clojure.clj)* *`make run-primary-constructor`*
 ```clojure
 (let [instance1 (new TestClass 1 "test")
       instance2 (TestClass. 1 "test")] ;the shorthand notation
@@ -78,7 +84,9 @@ And the clojure code to instantiate this class looks like [this](src/primary_con
 
 ## The n-ary constructors
 
-Just same as in Java, having multiple constructor is also possible in Scala. Accessing these constructors is as straightforward as accessing the primary constructor. [The class below](src/n_ary_constructor/scala.scala);
+Just same as in Java, having multiple constructor is also possible in Scala. Accessing these constructors is as straightforward as accessing the primary constructor. The class below;
+
+*[nary-constructor.scala](src/n_ary_constructor/scala.scala)*
 ```scala
 class TestClass(val a: Int, val b: Int) {
 
@@ -96,7 +104,9 @@ class TestClass(val a: Int, val b: Int) {
 }
 ```
 
-Generates the java api below (`make show-nary-constructor`);
+generates the java api below;
+
+*`make show-nary-constructor`*
 ```java
 public class clojure.scala.interop.nary.constructor.TestClass {
   public int a();
@@ -108,7 +118,9 @@ public class clojure.scala.interop.nary.constructor.TestClass {
 }
 ```
 
-Accessing these constructors are demonstrated [in this class](src/n_ary_constructor/clojure.clj);
+Accessing these constructors are demonstrated below;
+
+*[nary-constructor.clj](src/n_ary_constructor/clojure.clj)* *`make run-nary-constructor`*
 ```clojure
 (let [instance1 (TestClass. 1 2)
     instance2 (TestClass. 2)
@@ -565,9 +577,15 @@ Hope this document was helpful to you.
 
 
 TODO:
+* add make comm and link to each code piece
+
+* MODULE$ is a static ref to sing instance
+
+* remove commas from clojure code
 * fix n-ary-constructorSSss add plural
 * fix prints stuff
 * fix inconsistent titles/classnames/code examples
 * invite PRs
 * fix --- line breaks
 * Richards pr
+* add thanks to rich,kev,fol
