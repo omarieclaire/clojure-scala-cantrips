@@ -78,8 +78,8 @@ And the clojure code to instantiate this class looks like below;
 (let [instance1 (new TestClass 1 "test")
       instance2 (TestClass. 1 "test")] ;the shorthand notation
 
-      (println instance1)   ;TestClass@
-      (println instance2))) ;TestClass@
+      (println instance1)   ; prints TestClass@...
+      (println instance2))) ; prints TestClass@...
 ```
 
 ## N-ary constructors
@@ -127,17 +127,17 @@ Accessing these constructors are demonstrated below;
     instance3 (TestClass.)
     instance4 (TestClass. "4")]
 
-    (println (.a instance1)) ; 1
-    (println (.b instance1)) ; 2
+    (println (.a instance1)) ; prints 1
+    (println (.b instance1)) ; prints 2
 
-    (println (.a instance2)) ; 2
-    (println (.b instance2)) ; 0
+    (println (.a instance2)) ; prints 2
+    (println (.b instance2)) ; prints 0
 
-    (println (.a instance3)) ; 0
-    (println (.b instance3)) ; 0
+    (println (.a instance3)) ; prints 0
+    (println (.b instance3)) ; prints 0
 
-    (println (.a instance4))   ; 4
-    (println (.b instance4)))) ; 4
+    (println (.a instance4))   ; prints 4
+    (println (.b instance4)))) ; prints 4
 ```
 
 ## Immutable instance fields
@@ -171,8 +171,8 @@ Let’s try to access these fields. Following the clojure - java interop accessi
 (let [instance (TestClass. 1)
         attr1 (.attr1 instance)
         attr2 (.attr2 instance)]
-    (println attr1)   ; 1
-    (println attr2))) ; 2
+    (println attr1)   ; prints 1
+    (println attr2))) ; prints 2
 ````
 
 ## Mutable instance fields
@@ -206,8 +206,8 @@ Again here defining a field in the constructor or in the class body doesn’t ma
 (let [instance (TestClass. 1)
         attr1 (.attr1 instance)
         attr2 (.attr2 instance)]
-    (println attr1)   ; 1
-    (println attr2))  ; 2
+    (println attr1)   ; prints 1
+    (println attr2))  ; prints 2
 ```
 
 What about mutating these fields? You probably noticed these weird named methods (we’ll have plenty of these!);
@@ -220,9 +220,9 @@ This is a method that takes an `int` and doesn’t return back a value. This is 
 *[mutable-fields.clj](src/mutable_fields/clojure.clj)* *`make run-mutable-fields`*
 ```clojure
 (let [instance (TestClass. 10)]
-    (println (.attr1 instance)) ; 10
+    (println (.attr1 instance)) ; prints 10
     (.attr1_$eq instance 99)
-    (println (.attr1 instance)))) ; 99
+    (println (.attr1 instance)))) ; prints 99
 ```
 
 ## Class methods
@@ -301,7 +301,7 @@ Scala doesn’t have static methods, its way of providing a similar functionalit
 *[companion_objects.clj](src/companion_objects/clojure.clj)* *`make run-companion-object`*
 ```clojure
 (let [singleton-instance (TestClass$/MODULE$)]
-  (println singleton-instance)) ; #object[clojure.scala.interop.objects.TestClass$]
+  (println singleton-instance)) ; prints #object[clojure.scala.interop.objects.TestClass$]
 ```
 
 #### A note on the companion objects
@@ -363,22 +363,22 @@ Looking at the interface above, there are two ways of accessing the provided fun
 ```clojure
 (let [object-instance (TestClass$/MODULE$)]
 
-  (println (TestClass/inc 1))        ;prints 2
-  (println (.inc object-instance 1)) ;prints 2
+  (println (TestClass/inc 1))        ; prints 2
+  (println (.inc object-instance 1)) ; prints 2
 
-  (println (TestClass/immutableField))        ;prints 0
-  (println (.immutableField object-instance)) ;prints 0
+  (println (TestClass/immutableField))        ; prints 0
+  (println (.immutableField object-instance)) ; prints 0
 
-  (println (TestClass/mutableField))          ;prints 1
-  (println (.mutableField object-instance))   ;prints 1
+  (println (TestClass/mutableField))          ; prints 1
+  (println (.mutableField object-instance))   ; prints 1
 
-  (TestClass/mutableField_$eq 3)              ;sets the mutable value to 3 through static method
-  (println (TestClass/mutableField))          ;prints 3
-  (println (.mutableField object-instance))   ;prints 3
+  (TestClass/mutableField_$eq 3)              ; sets the mutable value to 3 through static method
+  (println (TestClass/mutableField))          ; prints 3
+  (println (.mutableField object-instance))   ; prints 3
 
-  (.mutableField_$eq object-instance 4)       ;sets the mutable value to 4 through object-instance method
-  (println (TestClass/mutableField))          ;prints 4
-  (println (.mutableField object-instance))   ;prints 4
+  (.mutableField_$eq object-instance 4)       ; sets the mutable value to 4 through object-instance method
+  (println (TestClass/mutableField))          ; prints 4
+  (println (.mutableField object-instance))   ; prints 4
 ```
 
 ## The magic apply method
@@ -446,9 +446,9 @@ Naturally the java signature of the `sum` method doesn’t give any insight abou
 ```clojure
 (let [instance (TestClass.)
       default-argument (.sum$default$2 instance)]
-  (println default-argument)                      ;prints 10
-  (println (.sum instance 30 40))                 ;prints 70
-  (println (.sum instance 30 default-argument)))) ;prints 40
+  (println default-argument)                      ; prints 10
+  (println (.sum instance 30 40))                 ; prints 70
+  (println (.sum instance 30 default-argument)))) ; prints 40
 ```
 
 As demonstrated above the clojure way of accessing the default value of a parameter is by calling its generated method. This is probably not more convenient than using a hardcoded parameter, however we need to keep in mind that the default values that are provided by a library may change over time.
@@ -544,18 +544,18 @@ Let’s have a look at an example usage of the `Option` class in scala;
 val a = Option(null)
 val b = Option(2)
 
-println(a) // None
-println(b) // Some(2)
+println(a) // prints None
+println(b) // prints Some(2)
 
-println(a.isEmpty) // true
-println(b.isEmpty) // false
+println(a.isEmpty) // prints true
+println(b.isEmpty) // prints false
 
-// println(a.get) // NoSuchElementException("None.get")
-println(b.get) // 2
+// println(a.get) // throws NoSuchElementException("None.get")
+println(b.get) // prints 2
 
 b match {
   case None => println("Nope")
-  case Some(x) => println(x.toString) // "2"
+  case Some(x) => println(x.toString) // prints "2"
 }
 ```
 
@@ -569,15 +569,15 @@ Now that we know how to use the methods of the option class, we can write this c
 (println a) ; None
 (println b) ; Some(2)
 
-(println (.isEmpty a)) ; true
-(println (.isEmpty b)) ; false
+(println (.isEmpty a)) ; prints true
+(println (.isEmpty b)) ; prints false
 
-; (println (.get a)) ; java.util.NoSuchElementException: None.get
-(println (.get b)) ; 2
+; (println (.get a)) ; throws java.util.NoSuchElementException: None.get
+(println (.get b)) ; prints 2
 
 (if (.isEmpty b)
   (println "Nope")
-  (println (.toString (.get b)))))) ; 2
+  (println (.toString (.get b)))))) ; prints 2
 ```
 
 ## Outro
@@ -592,8 +592,6 @@ Hope this document was helpful to you.
 
 
 TODO:
-
-* fix prints stuff
 * fix inconsistent titles/classnames/code examples
 * invite PRs
 * fix --- line breaks
