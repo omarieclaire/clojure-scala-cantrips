@@ -17,7 +17,7 @@ This document covers couple of tips and tricks on how to consume scala apis from
   * [The option class](https://github.com/grandbora/clojure-scala-cantrips/blob/master/README.md#the-option-class)
   * [Outro](https://github.com/grandbora/clojure-scala-cantrips/blob/master/README.md#outro)
 
-## Intro - *let’s get retarded*
+## Intro - *let’s get started*
 
 Clojure and scala, both being laguages that run on jvm, have a common denominator. That is the java byte code. In order to use a scala library from clojure code we need to know two things;
   * How does a scala api manifest itselfs in java byte code
