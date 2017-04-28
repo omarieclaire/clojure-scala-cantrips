@@ -142,14 +142,18 @@ Accessing these constructors are demonstrated below;
 
 ## Immutable instance fields
 
-Let’s look at [the class below](src/immutable_fields/scala.scala);
+Let’s look at the class below;
+
+*[immutable-fields.scala](src/immutable_fields/scala.scala)*
 ```scala
 class TestClass(val attr1: Int) {
  val attr2: Int = 2
 }
 ```
 
-This class generates the api below (`make show-immutable-fields`);
+This class generates the api below;
+
+*`make show-immutable-fields`*
 ```java
 public class clojure.scala.interop.immutable.fields.TestClass {
   public int attr1();
@@ -157,9 +161,12 @@ public class clojure.scala.interop.immutable.fields.TestClass {
   public clojure.scala.interop.immutable.fields.TestClass(int);
 }
 ```
+
 From the above code we can deduce that defining a `val` in the constructor or in the class body doesn’t change the java api of the class. Both `attr1` and `attr2` follow the same pattern in their disassembled code. Another noteworthy point is that scala `val`s are turned into java methods.
 
-Let’s try to access these fields. Following the clojure - java interop accessing the methods looks like [this class](src/immutable_fields/clojure.clj);
+Let’s try to access these fields. Following the clojure - java interop accessing the methods looks like below;
+
+*[immutable-fields.clj](src/immutable_fields/clojure.clj)* *`make run-immutable-fields`*
 ```clojure
 (let [instance (TestClass. 1)
         attr1 (.attr1 instance)
@@ -170,14 +177,18 @@ Let’s try to access these fields. Following the clojure - java interop accessi
 
 ## Mutable instance fields
 
-Let’s repeat the same exercise [with mutable fields](src/mutable_fields/scala.scala), namely `var`s;
+Let’s repeat the same exercise with mutable fields, namely `var`s;
+
+*[mutable-fields.scala](src/mutable_fields/scala.scala)*
 ```scala
 class TestClass(var attr1: Int){
  var attr2: Int = 2
 }
 ```
 
-This class compiles into (`make show-mutable-fields`);
+This class compiles into;
+
+*`make show-mutable-fields`*
 ```java
 public class clojure.scala.interop.mutable.fields.TestClass {
   public int attr1();
@@ -189,6 +200,8 @@ public class clojure.scala.interop.mutable.fields.TestClass {
 ```
 
 Again here defining a field in the constructor or in the class body doesn’t make a difference on the java api. Accessing the mutable fields is same as accessing the immutable fields. Demonstrated below;
+
+*[mutable-fields.clj](src/mutable_fields/clojure.clj)* *`make run-mutable-fields`*
 ```clojure
 (let [instance (TestClass. 1)
         attr1 (.attr1 instance)
@@ -203,6 +216,8 @@ public void attr1_$eq(int);
 ```
 
 This is a method that takes an `int` and doesn’t return back a value. This is the setter method of the variable `attr1`, that lets us mutate its value. Let's see its usage below;
+
+*[mutable-fields.clj](src/mutable_fields/clojure.clj)* *`make run-mutable-fields`*
 ```clojure
 (let [instance (TestClass. 10)]
     (println (.attr1 instance)) ; 10
