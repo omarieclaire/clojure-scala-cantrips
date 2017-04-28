@@ -268,11 +268,9 @@ public class clojure.scala.interop.class.methods.TestClass {
   (.sideEffect instance 2 3)))    ; does a side effect
 ```
 
----------------
+## Companion objects
 
 So far we indulged ourselves with the fundamental concepts that easily map to java structures. Let’s get to the things where scala sets itself apart from java.
-
-## Companion objects
 
 Companion objects are one of the useful tools of scala. Let’s see how they manifest themselves in Java code. The object below;
 
@@ -523,11 +521,9 @@ Let’s have a look at the code below to see what parts of this api we can make 
 
 The code above demonstrates the usage of `toString` and `equals` methods. The interface a case class yields has few methods that can be leveraged in a clojure consumer. However the greater benefit of a case class is being an immutable [data transfer object](https://martinfowler.com/eaaCatalog/dataTransferObject.html)(*obligatory martin fowler link!*). And we can benefit from this in the clojure codebases.
 
----------------
+## The option class
 
 So far we applied the clojure-scala interop techniques to the classes that we have defined. Now let’s use our newly acquired powers on a class that comes with the scala standard library.
-
-## The option class
 
 The `Option` class is one of the commonly used data structures that is provided by scala standard library. When we look at the [source code of the `Option` class](https://github.com/scala/scala/blob/v2.12.1/src/library/scala/Option.scala#L11) we see that there are four main structures that holds it together. These are (simplified);
 * object Option
@@ -592,8 +588,6 @@ Hope this document was helpful to you.
 
 
 TODO:
-* fix inconsistent titles/classnames/code examples
-* invite PRs
-* fix --- line breaks
+
 * Richards pr
 * add thanks to rich,kev,fol
