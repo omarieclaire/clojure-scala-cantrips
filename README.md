@@ -2,6 +2,23 @@
 
 This document covers couple of tips and tricks on how to consume scala apis from a clojure codebase.
 
+### Index
+  * [Intro](https://github.com/grandbora/clojure-scala-cantrips/blob/master/README.md#intro---lets-get-retarded)
+  * [Prerequisites](https://github.com/grandbora/clojure-scala-cantrips/blob/master/README.md#prerequisites)
+  * [The primary constructor](https://github.com/grandbora/clojure-scala-cantrips/blob/master/README.md#the-primary-constructor)
+  * [The n-ary constructors](https://github.com/grandbora/clojure-scala-cantrips/blob/master/README.md#the-n-ary-constructors)
+  * [Immutable instance fields](https://github.com/grandbora/clojure-scala-cantrips/blob/master/README.md#immutable-instance-fields)
+  * [Mutable instance fields](https://github.com/grandbora/clojure-scala-cantrips/blob/master/README.md#mutable-instance-fields)
+  * [Class methods](https://github.com/grandbora/clojure-scala-cantrips/blob/master/README.md#class-methods)
+  * [Companion objects](https://github.com/grandbora/clojure-scala-cantrips/blob/master/README.md#companion-objects)
+  * [Class members of companion objects](https://github.com/grandbora/clojure-scala-cantrips/blob/master/README.md#class-members-of-companion-objects)
+  * [The magic apply method](https://github.com/grandbora/clojure-scala-cantrips/blob/master/README.md#the-magic-apply-method)
+  * [Default arguments](https://github.com/grandbora/clojure-scala-cantrips/blob/master/README.md#default-arguments)
+  * [The option class](https://github.com/grandbora/clojure-scala-cantrips/blob/master/README.md#the-option-class)
+  * [Outro](https://github.com/grandbora/clojure-scala-cantrips/blob/master/README.md#outro)
+
+## Intro - *let’s get retarded*
+
 Clojure and scala, both being laguages that run on jvm, have a common denominator. That is the java byte code. In order to use a scala library from clojure code we need to know two things;
   * How does a scala api manifest itselfs in java byte code
   * How to consume a java api from clojure code
@@ -17,10 +34,7 @@ This document covers the basic usecases of clojure - scala interoperability. Peo
 
 This document is more for educational purposes rather than production usage. There are libraries out there that does a good job in providing the functionality covered here. This document is for understanding the underlying semantics of clojure - scala interoperability.
 
-
-## Let’s get started
-
-#### Prerequisites
+## Prerequisites
 
 The source code of all of the examples below can be found in the [`src` directory](src). In order to see the java api of the scala structure you can run;
 ```make
@@ -32,7 +46,7 @@ In order to execute the clojure code that consumes the scala api  you can run;
 make run-{{example-name}}
 ```
 
-## Accessing the constructor
+## The primary constructor
 
 Instantiating regular scala classes is as straightforward as instantiating a java class. Given [this class](src/primary_constructor/scala.scala);
 ```scala
@@ -55,7 +69,7 @@ And the clojure code to instantiate this class looks like [this](src/primary_con
       (println instance2))) ;TestClass@
 ```
 
-## Accessing the n-ary constructors
+## The n-ary constructors
 
 Just same as in Java, having multiple constructor is also possible in Scala. Accessing these constructors is as straightforward as accessing the primary constructor. [The class below](src/n_ary_constructor/scala.scala);
 ```scala
@@ -107,7 +121,7 @@ Accessing these constructors are demonstrated [in this class](src/n_ary_construc
     (println (.b instance4)))) ; 4
 ```
 
-## Accessing the immutable instance fields
+## Immutable instance fields
 
 Let’s look at [the class below](src/immutable_fields/scala.scala);
 ```scala
@@ -135,7 +149,7 @@ Let’s try to access these fields. Following the clojure - java interop accessi
     (println attr2))) ; 2
 ````
 
-## Accessing mutable instance fields
+## Mutable instance fields
 
 Let’s repeat the same exercise [with mutable fields](src/mutable_fields/scala.scala), namely `var`s;
 ```scala
@@ -535,18 +549,15 @@ Now that we know how to use the methods of the option class, we can write this c
 
 
 
-
-
-
 TODO:
 * Mention versions 
 * mention deps `lein` `scalac`
 * fix n-ary-constructorSSss add plural
 * fix prints stuff
+* fix inconsistent titles/classnames/code examples
 * invite PRs
 * fix ---
 * Richards pr
-
-
-
-
+* add index
+* add conclusion
+* add that's all folks
