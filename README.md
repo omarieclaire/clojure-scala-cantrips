@@ -41,9 +41,16 @@ The source code of all of the examples below can be found in the [`src` director
 make show-{{example-name}}
 ```
 
-In order to execute the clojure code that consumes the scala api  you can run;
+In order to execute the clojure code that consumes the scala api you can run;
 ```make
 make run-{{example-name}}
+```
+
+Running the examples requires java, the scala compiler `scalac` and the clojure build tool Leiningen ('lein') to be installed on the host machine. The examples are tested in the versions of these tool shown below;
+```
+Scala compiler 2.12.1
+Leiningen 2.7.1
+java 1.8.0_92
 ```
 
 ## The primary constructor
@@ -558,8 +565,6 @@ Hope this document was helpful to you.
 
 
 TODO:
-* Mention versions 
-* mention deps `lein` `scalac`
 * fix n-ary-constructorSSss add plural
 * fix prints stuff
 * fix inconsistent titles/classnames/code examples
