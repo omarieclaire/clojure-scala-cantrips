@@ -6,7 +6,7 @@ This document covers couple of tips and tricks on how to consume scala apis from
   * [Intro](https://github.com/grandbora/clojure-scala-cantrips/blob/master/README.md#intro---lets-get-started)
   * [Prerequisites](https://github.com/grandbora/clojure-scala-cantrips/blob/master/README.md#prerequisites)
   * [The primary constructor](https://github.com/grandbora/clojure-scala-cantrips/blob/master/README.md#the-primary-constructor)
-  * [The n-ary constructors](https://github.com/grandbora/clojure-scala-cantrips/blob/master/README.md#the-n-ary-constructors)
+  * [N-ary constructors](https://github.com/grandbora/clojure-scala-cantrips/blob/master/README.md#n-ary-constructors)
   * [Immutable instance fields](https://github.com/grandbora/clojure-scala-cantrips/blob/master/README.md#immutable-instance-fields)
   * [Mutable instance fields](https://github.com/grandbora/clojure-scala-cantrips/blob/master/README.md#mutable-instance-fields)
   * [Class methods](https://github.com/grandbora/clojure-scala-cantrips/blob/master/README.md#class-methods)
@@ -82,11 +82,11 @@ And the clojure code to instantiate this class looks like below;
       (println instance2))) ;TestClass@
 ```
 
-## The n-ary constructors
+## N-ary constructors
 
 Just same as in Java, having multiple constructor is also possible in Scala. Accessing these constructors is as straightforward as accessing the primary constructor. The class below;
 
-*[nary-constructor.scala](src/n_ary_constructor/scala.scala)*
+*[nary-constructors.scala](src/n_ary_constructors/scala.scala)*
 ```scala
 class TestClass(val a: Int, val b: Int) {
 
@@ -106,9 +106,9 @@ class TestClass(val a: Int, val b: Int) {
 
 generates the java api below;
 
-*`make show-nary-constructor`*
+*`make show-nary-constructors`*
 ```java
-public class clojure.scala.interop.nary.constructor.TestClass {
+public class clojure.scala.interop.nary.constructors.TestClass {
   public int a();
   public int b();
   public clojure.scala.interop.nary.constructor.TestClass(int, int);
@@ -120,7 +120,7 @@ public class clojure.scala.interop.nary.constructor.TestClass {
 
 Accessing these constructors are demonstrated below;
 
-*[nary-constructor.clj](src/n_ary_constructor/clojure.clj)* *`make run-nary-constructor`*
+*[nary-constructors.clj](src/n_ary_constructors/clojure.clj)* *`make run-nary-constructors`*
 ```clojure
 (let [instance1 (TestClass. 1 2)
     instance2 (TestClass. 2)
@@ -593,7 +593,6 @@ Hope this document was helpful to you.
 
 TODO:
 
-* fix n-ary-constructorSSss add plural
 * fix prints stuff
 * fix inconsistent titles/classnames/code examples
 * invite PRs

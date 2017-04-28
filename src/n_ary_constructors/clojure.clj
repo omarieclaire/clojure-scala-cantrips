@@ -1,5 +1,5 @@
-(ns n-ary-constructor.clojure
-  (:import (clojure.scala.interop.nary.constructor TestClass)))
+(ns n-ary-constructors.clojure
+  (:import (clojure.scala.interop.nary.constructors TestClass)))
 
 (defn -main [& _]
 

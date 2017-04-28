@@ -1,4 +1,4 @@
-package clojure.scala.interop.nary.constructor
+package clojure.scala.interop.nary.constructors
 
 class TestClass(val a: Int, val b: Int) {
 

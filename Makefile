@@ -10,11 +10,11 @@ show-primary-constructor: compile
 run-primary-constructor: compile
 	lein run -m primary-constructor.clojure
 
-show-nary-constructor: compile
-	javap src/clojure/scala/interop/nary/constructor/TestClass.class
+show-nary-constructors: compile
+	javap src/clojure/scala/interop/nary/constructors/TestClass.class
 
-run-nary-constructor: compile
-	lein run -m n-ary-constructor.clojure
+run-nary-constructors: compile
+	lein run -m n-ary-constructors.clojure
 
 show-immutable-fields: compile
 	javap src/clojure/scala/interop/immutable/fields/TestClass.class
