@@ -475,6 +475,66 @@ Let’s have a look at the code below to see what parts of this api we can make 
 
 The code above demonstrates the usage of `toString` and `equals` methods. The interface a case class yields has few methods that can be leveraged in a clojure consumer. However the greater benefit of a case class is being an immutable [data transfer object](https://martinfowler.com/eaaCatalog/dataTransferObject.html)(*obligatory martin fowler link!*). And we can benefit from this in the clojure codebases.
 
+---------------
+
+So far we applied the clojure-scala interop techniques to the classes that we have defined. Now let’s use our newly acquired powers on a class that comes with the scala standard library.
+
+## The option class
+
+The `Option` class is one of the commonly used data structures that is provided by scala standard library. When we look at the [source code of the `Option` class](https://github.com/scala/scala/blob/v2.12.1/src/library/scala/Option.scala#L11) we see that there are four main structures that holds it together. These are (simplified);
+* object Option
+* sealed abstract class Option
+* final case class Some // extends Option abstract class
+* case object None // extends Option abstract class
+
+Its complete java interface can be seen [here](src/option_classes/option_classes.java) (or `make show-option-classes`)
+
+Let’s have a look at an example usage of the `Option` class in scala;
+
+*[option-usage.scala](src/option_classes/scala.scala)* *`make run-option-classes-scala`*
+```scala
+val a = Option(null)
+val b = Option(2)
+
+println(a) // None
+println(b) // Some(2)
+
+println(a.isEmpty) // true
+println(b.isEmpty) // false
+
+// println(a.get) // NoSuchElementException("None.get")
+println(b.get) // 2
+
+b match {
+  case None => println("Nope")
+  case Some(x) => println(x.toString) // "2"
+}
+```
+
+Now that we know how to use the methods of the option class, we can write this code in clojure. Demonstrated below;
+
+*[option-usage.clojure](src/option_classes/clojure.clj)* *`make run-option-classes-clojure`*
+```clojure
+(let [a (Option/apply nil)
+      b (Option/apply 2)]
+
+(println a) ; None
+(println b) ; Some(2)
+
+(println (.isEmpty a)) ; true
+(println (.isEmpty b)) ; false
+
+; (println (.get a)) ; java.util.NoSuchElementException: None.get
+(println (.get b)) ; 2
+
+(if (.isEmpty b)
+  (println "Nope")
+  (println (.toString (.get b)))))) ; 2
+```
+
+
+
+
 
 
 
@@ -483,9 +543,9 @@ TODO:
 * mention deps `lein` `scalac`
 * fix n-ary-constructorSSss add plural
 * fix prints stuff
-
-
-
+* invite PRs
+* fix ---
+* Richards pr
 
 
 

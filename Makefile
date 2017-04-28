@@ -63,3 +63,12 @@ show-case-classes: compile
 
 run-case-classes:
 	lein run -m case-classes.clojure
+
+show-option-classes:
+	javap -classpath scala-library-2.12.1.jar scala.Option scala.Option$$ scala.None scala.None$$ scala.Some scala.Some$$
+
+run-option-classes-scala:
+	scala src/option_classes/scala.scala
+
+run-option-classes-clojure:
+	lein run -m option-classes.clojure
