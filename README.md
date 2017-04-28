@@ -66,8 +66,8 @@ generates the java api below;
 
 *`make show-primary-constructor`*
 ```java
-public class TestClass {
-  public TestClass(int, java.lang.String);
+public class clojure.scala.interop.primary.constructor.TestClass {
+  public clojure.scala.interop.primary.constructor.TestClass(int, java.lang.String);
 }
 ```
 

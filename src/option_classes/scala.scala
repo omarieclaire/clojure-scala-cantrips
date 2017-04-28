@@ -1,3 +1,4 @@
+package clojure.scala.interop.option.classes
 
 object main extends App {
 

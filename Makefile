@@ -67,8 +67,8 @@ run-case-classes:
 show-option-classes:
 	javap -classpath scala-library-2.12.1.jar scala.Option scala.Option$$ scala.None scala.None$$ scala.Some scala.Some$$
 
-run-option-classes-scala:
-	scala src/option_classes/scala.scala
+run-option-classes-scala: compile
+	cd src && scala clojure.scala.interop.option.classes.main
 
 run-option-classes-clojure:
 	lein run -m option-classes.clojure
