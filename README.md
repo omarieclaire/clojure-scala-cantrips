@@ -546,7 +546,15 @@ Now that we know how to use the methods of the option class, we can write this c
   (println (.toString (.get b)))))) ; 2
 ```
 
+## Outro
 
+The examples that are covered in this document are the most basic use cases. There are plenty of use cases that are not covered here, however this document lays out a methodical approach to figure out how to consume any scala api.
+
+Hope this document was helpful to you.
+
+*Feel free to send a pr for the corrections and/or additions you want to see.*
+
+![](https://raw.githubusercontent.com/grandbora/clojure-scala-cantrips/master/that'sallfolks.gif)
 
 
 TODO:
@@ -556,8 +564,5 @@ TODO:
 * fix prints stuff
 * fix inconsistent titles/classnames/code examples
 * invite PRs
-* fix ---
+* fix --- line breaks
 * Richards pr
-* add index
-* add conclusion
-* add that's all folks
