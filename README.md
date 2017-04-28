@@ -586,4 +586,4 @@ Hope this document was helpful to you.
 
 ![](https://raw.githubusercontent.com/grandbora/clojure-scala-cantrips/master/that'sallfolks.gif)
 
-*Thanks to @richardatsoundcloud, @folone and @kevincairo for their feedback.*
+*Thanks to [@richardatsoundcloud](https://github.com/richardatsoundcloud), [@folone](https://github.com/folone) and [@kevincairo](https://github.com/kevincairo) for their feedback.*
