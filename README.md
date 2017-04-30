@@ -1,6 +1,6 @@
 # Clojure-Scala Cantrips
 
-This document covers couple of tips and tricks on how to consume Scala apis from a Clojure codebase.
+This document covers couple of tips and tricks on how to consume Scala apis from Clojure codebases.
 
 ### Index
   * [Intro](https://github.com/grandbora/clojure-scala-cantrips/blob/master/README.md#intro---lets-get-started)
@@ -19,20 +19,19 @@ This document covers couple of tips and tricks on how to consume Scala apis from
 
 ## Intro - *let’s get started*
 
-Clojure and Scala, both being laguages that run on JVM, have a common denominator. That is the Java byte code. In order to use a Scala library from Clojure code we need to know two things;
-  * How does a Scala api manifest itselfs in Java byte code
-  * How to consume a Java api from Clojure code
+Clojure and Scala, both being laguages that run on JVM, have a common denominator. That is the Java bytecode. In order to use a Scala library from a Clojure code we need to know two things;
+  * What kind of a Java interface does this Scala code produce?
+  * How do we consume a given Java interface in a Clojure code?
 
-The internals of Scala to Java translation can be uncovered by using the [javap](http://docs.oracle.com/javase/7/docs/technotes/tools/windows/javap.html) tool. The knowledge on Clojure - Java interoperability is documented at [clojure.org](https://clojure.org/reference/java_interop). All of the examples shown in this document are put together based on these two resources.
-
+The first question can be answered by utilizing the [javap](http://docs.oracle.com/javase/7/docs/technotes/tools/windows/javap.html) tool. This tool prints out the interface of the given javal class files. The knowledge on Clojure - Java interoperability, which is necessary to answer the second question, is documented at [clojure.org](https://clojure.org/reference/java_interop). All of the examples shown in this document are put together based on these two resources.
 
 #### Who is this document for?
 
-This document covers the basic usecases of Clojure - Scala interoperability. People who want to learn about how the Scala structures are represented in Java and how the Clojure code interacts with them would be interested.
+This document would be interesting for people wo want to have practical information on Scala to Java conversion and Clojure - Java interop.
 
 #### Why?
 
-This document is more for educational purposes rather than production usage. There are libraries out there that does a good job in providing the functionality covered here. This document is for understanding the underlying semantics of Clojure - Scala interoperability.
+This document is created for educational purposes. The examples here can be used on production but I'd highly encourage checking out the existing Scala - Clojure interop libraries. There are open source libraries out there that does a good job in providing the functionality covered here. This document is for understanding the underlying semantics of Clojure - Scala interoperability.
 
 ## Prerequisites
 
@@ -46,7 +45,7 @@ In order to execute the Clojure code that consumes the Scala api you can run;
 make run-{{example-name}}
 ```
 
-Running the examples requires Java, the Scala compiler `scalac` and the Clojure build tool Leiningen ('lein') to be installed on the host machine. The examples are tested in the versions of these tool shown below;
+Running the examples requires Java, the Scala compiler `scalac` and the Clojure build tool Leiningen ('lein') to be installed on the host machine. The examples are tested in the versions of these tools shown below;
 ```
 Scala compiler 2.12.1
 Leiningen 2.7.1
@@ -55,7 +54,7 @@ Java 1.8.0_92
 
 ## The primary constructor
 
-Instantiating regular Scala classes is as straightforward as instantiating a Java class. The class below;
+Instantiating a regular Scala class is as straightforward as instantiating a Java class. The class below;
 
 *[primary-constructor.scala](src/primary_constructor/scala.scala)*
 ```scala
