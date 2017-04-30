@@ -23,7 +23,7 @@ Clojure and Scala, both being laguages that run on JVM, have a common denominato
   * What kind of a Java interface does this Scala code produce?
   * How do we consume a given Java interface in a Clojure code?
 
-The first question can be answered by utilizing the [javap](http://docs.oracle.com/javase/7/docs/technotes/tools/windows/javap.html) tool. This tool prints out the interface of the given javal class files. The knowledge on Clojure - Java interoperability, which is necessary to answer the second question, is documented at [clojure.org](https://clojure.org/reference/java_interop). All of the examples shown in this document are put together based on these two resources.
+The first question can be answered by utilizing the [javap](http://docs.oracle.com/javase/7/docs/technotes/tools/windows/javap.html) tool. This tool prints out the interface of the given java class files. The knowledge on Clojure - Java interoperability, which is necessary to answer the second question, is documented at [clojure.org](https://clojure.org/reference/java_interop). All of the examples shown in this document are put together based on these two resources.
 
 #### Who is this document for?
 
