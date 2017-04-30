@@ -495,8 +495,8 @@ public class clojure.scala.interop.case.classes.TestClass implements scala.Produ
 }
 ```
 
-For the sake of brevity, this documentation will focus on the parts that are interesting for a Clojure consumer. The interface a case class provides, mostly contains sugar methods that works well in a Scala codebase. Naturally in a Clojure codebase this interface does not bring many benefits. Some examples to these are;
-* `apply`: automatically invoked in Scala but not in Clojure. In Clojure code calling the apply method is not any simpler than calling the constructor or any other method, therefore doesn’t bring any benefits.
+For the sake of brevity, this documentation will focus on the parts that are interesting for a Clojure consumer. The interface a case class provides, mostly contains sugar methods that work well in a Scala codebase. Naturally in a Clojure codebase this interface does not bring many benefits. Some examples to these are;
+* `apply`: automatically invoked in Scala but not in Clojure. In Clojure code calling the apply method is not any simpler than calling the constructor or any other method, therefore it doesn’t bring any benefits.
 * `unapply`: useful for pattern matching in Scala, not applicable to Clojure.
 * `copy` : handy when the default parameter values are supported, doesn’t bring any benefits in Clojure.
 
