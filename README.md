@@ -1,6 +1,6 @@
 # Clojure-Scala Cantrips
 
-This document covers couple of tips and tricks on how to consume scala apis from a Clojure codebase.
+This document covers couple of tips and tricks on how to consume Scala apis from a Clojure codebase.
 
 ### Index
   * [Intro](https://github.com/grandbora/clojure-scala-cantrips/blob/master/README.md#intro---lets-get-started)
@@ -19,34 +19,34 @@ This document covers couple of tips and tricks on how to consume scala apis from
 
 ## Intro - *let’s get started*
 
-Clojure and scala, both being laguages that run on jvm, have a common denominator. That is the java byte code. In order to use a scala library from Clojure code we need to know two things;
-  * How does a scala api manifest itselfs in java byte code
+Clojure and Scala, both being laguages that run on jvm, have a common denominator. That is the java byte code. In order to use a Scala library from Clojure code we need to know two things;
+  * How does a Scala api manifest itselfs in java byte code
   * How to consume a java api from Clojure code
 
-The internals of scala to java translation can be uncovered by using the [javap](http://docs.oracle.com/javase/7/docs/technotes/tools/windows/javap.html) tool. The knowledge about Clojure - java interoperability is drawn from [its documentation](https://clojure.org/reference/java_interop). All of the examples shown in this document are put together based on these two resources.
+The internals of Scala to java translation can be uncovered by using the [javap](http://docs.oracle.com/javase/7/docs/technotes/tools/windows/javap.html) tool. The knowledge about Clojure - java interoperability is drawn from [its documentation](https://clojure.org/reference/java_interop). All of the examples shown in this document are put together based on these two resources.
 
 
 #### Who is this document for?
 
-This document covers the basic usecases of Clojure - scala interoperability. People who want to learn about how the scala structures are represented in java and how the Clojure code interacts with them would be interested.
+This document covers the basic usecases of Clojure - Scala interoperability. People who want to learn about how the Scala structures are represented in java and how the Clojure code interacts with them would be interested.
 
 #### Why?
 
-This document is more for educational purposes rather than production usage. There are libraries out there that does a good job in providing the functionality covered here. This document is for understanding the underlying semantics of Clojure - scala interoperability.
+This document is more for educational purposes rather than production usage. There are libraries out there that does a good job in providing the functionality covered here. This document is for understanding the underlying semantics of Clojure - Scala interoperability.
 
 ## Prerequisites
 
-The source code of all of the examples below can be found in the [`src` directory](src). In order to see the java api of the scala structure you can run;
+The source code of all of the examples below can be found in the [`src` directory](src). In order to see the java api of the Scala structure you can run;
 ```make
 make show-{{example-name}}
 ```
 
-In order to execute the Clojure code that consumes the scala api you can run;
+In order to execute the Clojure code that consumes the Scala api you can run;
 ```make
 make run-{{example-name}}
 ```
 
-Running the examples requires java, the scala compiler `scalac` and the Clojure build tool Leiningen ('lein') to be installed on the host machine. The examples are tested in the versions of these tool shown below;
+Running the examples requires java, the Scala compiler `scalac` and the Clojure build tool Leiningen ('lein') to be installed on the host machine. The examples are tested in the versions of these tool shown below;
 ```
 Scala compiler 2.12.1
 Leiningen 2.7.1
@@ -55,7 +55,7 @@ java 1.8.0_92
 
 ## The primary constructor
 
-Instantiating regular scala classes is as straightforward as instantiating a java class. The class below;
+Instantiating regular Scala classes is as straightforward as instantiating a java class. The class below;
 
 *[primary-constructor.scala](src/primary_constructor/scala.scala)*
 ```scala
@@ -162,7 +162,7 @@ public class clojure.scala.interop.immutable.fields.TestClass {
 }
 ```
 
-From the above code we can deduce that defining a `val` in the constructor or in the class body doesn’t change the java api of the class. Both `attr1` and `attr2` follow the same pattern in their disassembled code. Another noteworthy point is that scala `val`s are turned into java methods.
+From the above code we can deduce that defining a `val` in the constructor or in the class body doesn’t change the java api of the class. Both `attr1` and `attr2` follow the same pattern in their disassembled code. Another noteworthy point is that Scala `val`s are turned into java methods.
 
 Let’s try to access these fields. Following the clojure - java interop accessing the methods looks like below;
 
@@ -270,9 +270,9 @@ public class clojure.scala.interop.class.methods.TestClass {
 
 ## Companion objects
 
-So far we indulged ourselves with the fundamental concepts that easily map to java structures. Let’s get to the things where scala sets itself apart from java.
+So far we indulged ourselves with the fundamental concepts that easily map to java structures. Let’s get to the things where Scala sets itself apart from java.
 
-Companion objects are one of the useful tools of scala. Let’s see how they manifest themselves in Java code. The object below;
+Companion objects are one of the useful tools of Scala. Let’s see how they manifest themselves in Java code. The object below;
 
 *[companion_objects.scala](src/companion_objects/scala.scala)*
 ```scala
@@ -292,7 +292,7 @@ public final class clojure.scala.interop.object.TestClass {
 }
 ```
 
-We see two classes generated by scala. These are `TestClass` and `TestClass$`. Lets investigate these classes. The `TestClass$` has different characteristics than the classes we have inspected so far; it has static methods.
+We see two classes generated by Scala. These are `TestClass` and `TestClass$`. Lets investigate these classes. The `TestClass$` has different characteristics than the classes we have inspected so far; it has static methods.
 
 Scala doesn’t have static methods, its way of providing a similar functionality is through objects. Objects are translated into Java classes, however they are a [singleton classes](https://en.wikipedia.org/wiki/Singleton_pattern) and the way to access their singleton instance is via the static class variable `MODULE$`. Following the Clojure-java interop documentation we can access the object singleton instance as shown below;
 
@@ -305,7 +305,7 @@ Scala doesn’t have static methods, its way of providing a similar functionalit
 #### A note on the companion objects
 Before we move on to the following topic, there is an interesting point I'd like to draw attention on.
 
-**The companion objects in scala do not exist without their classes.** In this example we see this case manifesting itself. Even though the `TestClass` object is defined without a class, its java interface yields two classes, `TestClass` and `TestClass$`. Another interesting point is that the generated java class `TestClass` has no constructors, not even a private one.
+**The companion objects in Scala do not exist without their classes.** In this example we see this case manifesting itself. Even though the `TestClass` object is defined without a class, its java interface yields two classes, `TestClass` and `TestClass$`. Another interesting point is that the generated java class `TestClass` has no constructors, not even a private one.
 
 `javap -private src/clojure/scala/interop/companion/object/TestClass.class` yields the interface below ([-private flag](http://docs.oracle.com/javase/1.5.0/docs/tooldocs/windows/javap.html) is used to show private members);
 
@@ -355,7 +355,7 @@ public final class clojure.scala.interop.object.members.TestClass {
 }
 ```
 
-Looking at the interface above, there are two ways of accessing the provided functionality; either using the static methods on `TestClass` or using the instance methods on `TestClass$`. As far as I tested either way results in identical outcomes. Even the mutable state is shared between these two classes, which would be the expectation of a consumer who is oblivious to the internals of scala. This is demonstrated below;
+Looking at the interface above, there are two ways of accessing the provided functionality; either using the static methods on `TestClass` or using the instance methods on `TestClass$`. As far as I tested either way results in identical outcomes. Even the mutable state is shared between these two classes, which would be the expectation of a consumer who is oblivious to the internals of Scala. This is demonstrated below;
 
 *[object-members.clj](src/object_members/clojure.clj)* *`make run-object-members`*
 ```clojure
@@ -381,7 +381,7 @@ Looking at the interface above, there are two ways of accessing the provided fun
 
 ## The magic apply method
 
-One common pattern in scala is defining apply method(s) on the companion object. Most of the time these methods are used for constructing an instance of the class, the object they belong is accompanying. Let’s inspect an example of this pattern;
+One common pattern in Scala is defining apply method(s) on the companion object. Most of the time these methods are used for constructing an instance of the class, the object they belong is accompanying. Let’s inspect an example of this pattern;
 
 *[apply-method.scala](src/apply_method/scala.scala)*
 ```scala
@@ -408,7 +408,7 @@ public class clojure.scala.interop.apply.method.TestClass {
 }
 ```
 
-While scala provides a sugar syntax for invoking the apply method, for a consumer written in cojure, apply method is just another static method defined on the class. Invocation of it is demonstrated below;
+While Scala provides a sugar syntax for invoking the apply method, for a consumer written in cojure, apply method is just another static method defined on the class. Invocation of it is demonstrated below;
 
 *[apply-method.clj](src/apply_method/clojure.clj)* *`make run-apply-method`*
 ```clojure
@@ -418,7 +418,7 @@ While scala provides a sugar syntax for invoking the apply method, for a consume
 
 ## Default arguments
 
-Another feature that is characteristic to scala is [default parameter values](http://docs.scala-lang.org/tutorials/tour/default-parameter-values.html). Given the `sum` method of the class below;
+Another feature that is characteristic to Scala is [default parameter values](http://docs.scala-lang.org/tutorials/tour/default-parameter-values.html). Given the `sum` method of the class below;
 
 *[default-arguments.scala](src/default_arguments/scala.scala)*
 ```scala
@@ -453,7 +453,7 @@ As demonstrated above the Clojure way of accessing the default value of a parame
 
 ## Case classes
 
-[Case classes](http://docs.scala-lang.org/tutorials/tour/case-classes.html) are another handy tool that is commonly used in scala codebases. Scala provides a bunch of features to case classes for free. These include but not limited to; default apply and unapply methods, immutability, hashCode and equals implementations. Let’s inspect the java api of a case class to get the full list;
+[Case classes](http://docs.scala-lang.org/tutorials/tour/case-classes.html) are another handy tool that is commonly used in Scala codebases. Scala provides a bunch of features to case classes for free. These include but not limited to; default apply and unapply methods, immutability, hashCode and equals implementations. Let’s inspect the java api of a case class to get the full list;
 
 *[case-classes.scala](src/case_classes/scala.scala)*
 ```scala
@@ -495,9 +495,9 @@ public class clojure.scala.interop.case.classes.TestClass implements scala.Produ
 }
 ```
 
-For the sake of brevity, this documentation will focus on the parts that are interesting for a Clojure consumer. The interface a case class provides, mostly contains sugar methods that works well in a scala codebase. Naturally in a Clojure codebase this interface does not bring many benefits. Some examples to these are;
-* `apply`: automatically invoked in scala but not in Clojure. In Clojure code calling the apply method is not any simpler than calling the constructor or any other method, therefore doesn’t bring any benefits.
-* `unapply`: useful for pattern matching in scala, not applicable to Clojure.
+For the sake of brevity, this documentation will focus on the parts that are interesting for a Clojure consumer. The interface a case class provides, mostly contains sugar methods that works well in a Scala codebase. Naturally in a Clojure codebase this interface does not bring many benefits. Some examples to these are;
+* `apply`: automatically invoked in Scala but not in Clojure. In Clojure code calling the apply method is not any simpler than calling the constructor or any other method, therefore doesn’t bring any benefits.
+* `unapply`: useful for pattern matching in Scala, not applicable to Clojure.
 * `copy` : handy when the default parameter values are supported, doesn’t bring any benefits in Clojure.
 
 Let’s have a look at the code below to see what parts of this api we can make use of from Clojure code;
@@ -523,9 +523,9 @@ The code above demonstrates the usage of `toString` and `equals` methods. The in
 
 ## The option class
 
-So far we applied the Clojure-scala interop techniques to the classes that we have defined. Now let’s use our newly acquired powers on a class that comes with the scala standard library.
+So far we applied the Clojure - Scala interop techniques to the classes that we have defined. Now let’s use our newly acquired powers on a class that comes with the Scala standard library.
 
-The `Option` class is one of the commonly used data structures that is provided by scala standard library. When we look at the [source code of the `Option` class](https://github.com/scala/scala/blob/v2.12.1/src/library/scala/Option.scala#L11) we see that there are four main structures that holds it together. These are (simplified);
+The `Option` class is one of the commonly used data structures that is provided by Scala standard library. When we look at the [source code of the `Option` class](https://github.com/scala/scala/blob/v2.12.1/src/library/scala/Option.scala#L11) we see that there are four main structures that holds it together. These are (simplified);
 * object Option
 * sealed abstract class Option
 * final case class Some // extends Option abstract class
@@ -533,7 +533,7 @@ The `Option` class is one of the commonly used data structures that is provided 
 
 Its complete java interface can be seen [here](src/option_classes/option_classes.java) (or `make show-option-classes`)
 
-Let’s have a look at an example usage of the `Option` class in scala;
+Let’s have a look at an example usage of the `Option` class in Scala;
 
 *[option-usage.scala](src/option_classes/scala.scala)* *`make run-option-classes-scala`*
 ```scala
@@ -578,7 +578,7 @@ Now that we know how to use the methods of the option class, we can write this c
 
 ## Outro
 
-The examples that are covered in this document are the most basic use cases. There are plenty of use cases that are not covered here, however this document lays out a methodical approach to figure out how to consume any scala api.
+The examples that are covered in this document are the most basic use cases. There are plenty of use cases that are not covered here, however this document lays out a methodical approach to figure out how to consume any Scala api.
 
 Hope this document was helpful to you.
 
