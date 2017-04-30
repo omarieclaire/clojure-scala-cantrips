@@ -23,7 +23,7 @@ Clojure and Scala, both being laguages that run on JVM, have a common denominato
   * What kind of a Java interface does this Scala code produce?
   * How do we consume a given Java interface in a Clojure code?
 
-The first question can be answered by utilizing the [javap](http://docs.oracle.com/javase/7/docs/technotes/tools/windows/javap.html) tool. This tool prints out the interface of the given java class files. The knowledge on Clojure - Java interoperability, which is necessary to answer the second question, is documented at [clojure.org](https://clojure.org/reference/java_interop). All of the examples shown in this document are put together based on these two resources.
+The first question can be answered by utilizing the [javap](http://docs.oracle.com/javase/7/docs/technotes/tools/windows/javap.html) tool. This tool prints out the interface of the given Java class files. The knowledge on Clojure - Java interoperability, which is necessary to answer the second question, is documented at [clojure.org](https://clojure.org/reference/java_interop). All of the examples shown in this document are put together based on these two resources.
 
 #### Who is this document for?
 
@@ -35,7 +35,7 @@ This document is created for educational purposes. The examples here can be used
 
 ## Prerequisites
 
-The source code of all of the examples below can be found in the [`src` directory](src). In order to see the Java interface produced by the Scala code of an example you can run;
+The source code of all of the examples can be found in the [`src` directory](src). In order to see the Java interface produced by the Scala code of an example you can run;
 ```make
 make show-{{example-name}}
 ```
@@ -45,7 +45,7 @@ In order to execute the Clojure code that uses this Java interface you can run;
 make run-{{example-name}}
 ```
 
-Running the examples requires Java, the Scala compiler `scalac` and the Clojure build tool Leiningen ('lein') to be installed on the host machine. The examples are tested in the versions of these tools shown below;
+Running the examples requires Java, the Scala compiler (`scalac`) and the Clojure build tool Leiningen (`lein`) to be installed on the host machine. The examples are tested in the versions of these tools shown below;
 ```
 Scala compiler 2.12.1
 Leiningen 2.7.1
@@ -141,7 +141,7 @@ Accessing these constructors are demonstrated below;
 
 ## Immutable instance fields
 
-Let’s look at the class below;
+Let’s have a look at the class below;
 
 *[immutable-fields.scala](src/immutable_fields/scala.scala)*
 ```scala
@@ -150,7 +150,7 @@ class TestClass(val attr1: Int) {
 }
 ```
 
-This class generates the interface below;
+This class produces the interface below;
 
 *`make show-immutable-fields`*
 ```java
@@ -161,7 +161,7 @@ public class clojure.scala.interop.immutable.fields.TestClass {
 }
 ```
 
-From the above code we can deduce that defining a `val` in the constructor or in the class body doesn’t change the Java interface of the class. Both `attr1` and `attr2` have the same signature. Another noteworthy point is that Scala `val`s are turned into Java methods.
+From the above code we can deduce that defining a `val` either in the constructor or in the class body doesn’t change the signature of the generated Java method. Both `attr1` and `attr2` have the same signature. Another noteworthy point is that Scala `val`s are turned into Java methods.
 
 Let’s try to access these fields. Following the Clojure - Java interop accessing the methods looks like below;
 
@@ -198,7 +198,7 @@ public class clojure.scala.interop.mutable.fields.TestClass {
 }
 ```
 
-Again here defining a field in the constructor or in the class body change the signature of the resulting method. Accessing the mutable fields is done in the same way as accessing the immutable fields. Demonstrated below;
+Again here defining a field either in the constructor or in the class body doesn't change the signature of the resulting method. Accessing the mutable fields is done in the same way as in accessing the immutable fields. Demonstrated below;
 
 *[mutable-fields.clj](src/mutable_fields/clojure.clj)* *`make run-mutable-fields`*
 ```clojure
