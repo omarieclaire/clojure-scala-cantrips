@@ -14,6 +14,7 @@ This document covers couple of tips and tricks on how to consume Scala apis from
   * [Class members of companion objects](https://github.com/grandbora/clojure-scala-cantrips/blob/master/README.md#class-members-of-companion-objects)
   * [The magic apply method](https://github.com/grandbora/clojure-scala-cantrips/blob/master/README.md#the-magic-apply-method)
   * [Default arguments](https://github.com/grandbora/clojure-scala-cantrips/blob/master/README.md#default-arguments)
+  * [Case classes](https://github.com/grandbora/clojure-scala-cantrips/blob/master/README.md#case-classes)
   * [The option class](https://github.com/grandbora/clojure-scala-cantrips/blob/master/README.md#the-option-class)
   * [Outro](https://github.com/grandbora/clojure-scala-cantrips/blob/master/README.md#outro)
 
