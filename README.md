@@ -35,12 +35,12 @@ This document is created for educational purposes. The examples here can be used
 
 ## Prerequisites
 
-The source code of all of the examples below can be found in the [`src` directory](src). In order to see the Java api of the Scala structure you can run;
+The source code of all of the examples below can be found in the [`src` directory](src). In order to see the Java interface produced by the Scala code of an example you can run;
 ```make
 make show-{{example-name}}
 ```
 
-In order to execute the Clojure code that consumes the Scala api you can run;
+In order to execute the Clojure code that uses this Java interface you can run;
 ```make
 make run-{{example-name}}
 ```
@@ -61,7 +61,7 @@ Instantiating a regular Scala class is as straightforward as instantiating a Jav
 class TestClass(param1: Int, param2: String)
 ```
 
-generates the Java api below;
+generates the Java interface below;
 
 *`make show-primary-constructor`*
 ```java
@@ -103,7 +103,7 @@ class TestClass(val a: Int, val b: Int) {
 }
 ```
 
-generates the Java api below;
+generates the Java interface below;
 
 *`make show-nary-constructors`*
 ```java
@@ -150,7 +150,7 @@ class TestClass(val attr1: Int) {
 }
 ```
 
-This class generates the api below;
+This class generates the interface below;
 
 *`make show-immutable-fields`*
 ```java
@@ -161,7 +161,7 @@ public class clojure.scala.interop.immutable.fields.TestClass {
 }
 ```
 
-From the above code we can deduce that defining a `val` in the constructor or in the class body doesn’t change the Java api of the class. Both `attr1` and `attr2` follow the same pattern in their disassembled code. Another noteworthy point is that Scala `val`s are turned into Java methods.
+From the above code we can deduce that defining a `val` in the constructor or in the class body doesn’t change the Java interface of the class. Both `attr1` and `attr2` have the same signature. Another noteworthy point is that Scala `val`s are turned into Java methods.
 
 Let’s try to access these fields. Following the Clojure - Java interop accessing the methods looks like below;
 
@@ -198,7 +198,7 @@ public class clojure.scala.interop.mutable.fields.TestClass {
 }
 ```
 
-Again here defining a field in the constructor or in the class body doesn’t make a difference on the Java api. Accessing the mutable fields is same as accessing the immutable fields. Demonstrated below;
+Again here defining a field in the constructor or in the class body change the signature of the resulting method. Accessing the mutable fields is done in the same way as accessing the immutable fields. Demonstrated below;
 
 *[mutable-fields.clj](src/mutable_fields/clojure.clj)* *`make run-mutable-fields`*
 ```clojure
@@ -452,7 +452,7 @@ As demonstrated above the Clojure way of accessing the default value of a parame
 
 ## Case classes
 
-[Case classes](http://docs.scala-lang.org/tutorials/tour/case-classes.html) are another handy tool that is commonly used in Scala codebases. Scala provides a bunch of features to case classes for free. These include but not limited to; default apply and unapply methods, immutability, hashCode and equals implementations. Let’s inspect the Java api of a case class to get the full list;
+[Case classes](http://docs.scala-lang.org/tutorials/tour/case-classes.html) are another handy tool that is commonly used in Scala codebases. Scala provides a bunch of features to case classes for free. These include but not limited to; default apply and unapply methods, immutability, hashCode and equals implementations. Let’s inspect the Java interface of a case class to get the full list;
 
 *[case-classes.scala](src/case_classes/scala.scala)*
 ```scala
@@ -499,7 +499,7 @@ For the sake of brevity, this documentation will focus on the parts that are int
 * `unapply`: useful for pattern matching in Scala, not applicable to Clojure.
 * `copy` : handy when the default parameter values are supported, doesn’t bring any benefits in Clojure.
 
-Let’s have a look at the code below to see what parts of this api we can make use of from Clojure code;
+Let’s have a look at the code below to see what parts of this interface we can make use of from Clojure code;
 
 *[case-classes.clj](src/case_classes/clojure.clj)* *`make run-case-classes`*
 ```clojure
