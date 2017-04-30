@@ -3,20 +3,20 @@
 This document covers couple of tips and tricks on how to consume Scala apis from Clojure codebases.
 
 ### Index
-  * [Intro](https://github.com/grandbora/clojure-scala-cantrips/blob/master/README.md#intro---lets-get-started)
-  * [Prerequisites](https://github.com/grandbora/clojure-scala-cantrips/blob/master/README.md#prerequisites)
-  * [The primary constructor](https://github.com/grandbora/clojure-scala-cantrips/blob/master/README.md#the-primary-constructor)
-  * [N-ary constructors](https://github.com/grandbora/clojure-scala-cantrips/blob/master/README.md#n-ary-constructors)
-  * [Immutable instance fields](https://github.com/grandbora/clojure-scala-cantrips/blob/master/README.md#immutable-instance-fields)
-  * [Mutable instance fields](https://github.com/grandbora/clojure-scala-cantrips/blob/master/README.md#mutable-instance-fields)
-  * [Class methods](https://github.com/grandbora/clojure-scala-cantrips/blob/master/README.md#class-methods)
-  * [Companion objects](https://github.com/grandbora/clojure-scala-cantrips/blob/master/README.md#companion-objects)
-  * [Class members of companion objects](https://github.com/grandbora/clojure-scala-cantrips/blob/master/README.md#class-members-of-companion-objects)
-  * [The magic apply method](https://github.com/grandbora/clojure-scala-cantrips/blob/master/README.md#the-magic-apply-method)
-  * [Default arguments](https://github.com/grandbora/clojure-scala-cantrips/blob/master/README.md#default-arguments)
-  * [Case classes](https://github.com/grandbora/clojure-scala-cantrips/blob/master/README.md#case-classes)
-  * [The option class](https://github.com/grandbora/clojure-scala-cantrips/blob/master/README.md#the-option-class)
-  * [Outro](https://github.com/grandbora/clojure-scala-cantrips/blob/master/README.md#outro)
+  * [Intro](#intro---lets-get-started)
+  * [Prerequisites](#prerequisites)
+  * [The primary constructor](#the-primary-constructor)
+  * [N-ary constructors](#n-ary-constructors)
+  * [Immutable instance fields](#immutable-instance-fields)
+  * [Mutable instance fields](#mutable-instance-fields)
+  * [Class methods](#class-methods)
+  * [Companion objects](#companion-objects)
+  * [Class members of companion objects](#class-members-of-companion-objects)
+  * [The magic apply method](#the-magic-apply-method)
+  * [Default arguments](#default-arguments)
+  * [Case classes](#case-classes)
+  * [The option class](#the-option-class)
+  * [Outro](#outro)
 
 ## Intro - *let’s get started*
 
@@ -256,7 +256,7 @@ public class clojure.scala.interop.class.methods.TestClass {
 }
 ```
 
-`method1` and `method2` are parameterless methods, therefore invoking them is not different than how we access the `val`s. [As we noted above](https://github.com/grandbora/clojure-scala-cantrips/blob/master/README.md#immutable-instance-fields) `val`s are turned into parameterless Java methods. For the other methods only difference is that they expect parameters. The code below demonstrates how we invoke these methods;
+`method1` and `method2` are parameterless methods, therefore invoking them is not different than how we access the `val`s. [As we noted above](#immutable-instance-fields) `val`s are turned into parameterless Java methods. For the other methods only difference is that they expect parameters. The code below demonstrates how we invoke these methods;
 
 *[class-methods.clj](src/class_methods/clojure.clj)* *`make run-class-methods`*
 ```clojure
