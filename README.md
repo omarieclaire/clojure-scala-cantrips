@@ -23,7 +23,7 @@ Clojure and Scala, both being laguages that run on JVM, have a common denominato
   * How does a Scala api manifest itselfs in Java byte code
   * How to consume a Java api from Clojure code
 
-The internals of Scala to Java translation can be uncovered by using the [javap](http://docs.oracle.com/javase/7/docs/technotes/tools/windows/javap.html) tool. The knowledge about Clojure - Java interoperability is drawn from [its documentation](https://clojure.org/reference/java_interop). All of the examples shown in this document are put together based on these two resources.
+The internals of Scala to Java translation can be uncovered by using the [javap](http://docs.oracle.com/javase/7/docs/technotes/tools/windows/javap.html) tool. The knowledge on Clojure - Java interoperability is documented at [clojure.org](https://clojure.org/reference/java_interop). All of the examples shown in this document are put together based on these two resources.
 
 
 #### Who is this document for?
