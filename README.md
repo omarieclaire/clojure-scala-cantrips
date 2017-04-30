@@ -578,9 +578,7 @@ Now that we know how to use the methods of the option class, we can write this c
 
 ## Outro
 
-The examples that are covered in this document are the most basic use cases. There are plenty of use cases that are not covered here, however this document lays out a methodical approach to figure out how to consume any Scala api.
-
-Hope this document was helpful to you.
+The examples that are covered in this document are by no means comprehensive. There are plenty of use cases that are not covered here. However this document lays out a methodical approach of figuring out a way to consume any Scala api. I hope this document was helpful to you.
 
 *Feel free to send a pr for the corrections and/or additions you want to see.*
 
