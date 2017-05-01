@@ -20,7 +20,7 @@ This document covers couple of tips and tricks on how to consume Scala apis from
 
 ## Intro - *let’s get started*
 
-Clojure and Scala, both being laguages that run on JVM, have a common denominator. That is the Java bytecode. In order to use a Scala library from a Clojure code we need to know two things;
+Clojure and Scala, both being languages that run on JVM, have a common denominator. That is the Java bytecode. In order to use a Scala library from a Clojure code we need to know two things;
   * What kind of a Java interface does this Scala code produce?
   * How do we consume a given Java interface in a Clojure code?
 
