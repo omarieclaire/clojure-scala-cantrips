@@ -28,11 +28,11 @@ The first question can be answered by utilizing the [javap](http://docs.oracle.c
 
 #### Who is this document for?
 
-This document would be interesting for people wo want to have practical information on Scala to Java conversion and Clojure - Java interop.
+This document would be interesting for people who want to have practical information on Scala to Java conversion and Clojure - Java interop.
 
 #### Why?
 
-This document is created for educational purposes. The examples here can be used on production but I'd highly encourage checking out the existing Scala - Clojure interop libraries. There are open source libraries out there that does a good job in providing the functionality covered here. This document is for understanding the underlying semantics of Clojure - Scala interoperability.
+This document is created for educational purposes. The examples here can be used on production but I'd highly encourage checking out the existing Scala - Clojure interop libraries. There are open source libraries out there that do a good job in providing the functionality covered here. This document is for understanding the underlying semantics of Clojure - Scala interoperability.
 
 ## Prerequisites
 
