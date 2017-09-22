@@ -34,11 +34,11 @@ show-class-methods: compile
 run-class-methods: compile
 	lein run -m class-methods.clojure
 
-show-companion-object: compile
-	javap src/clojure/scala/interop/companion/object/*.class
+show-singleton-objects: compile
+	javap src/clojure/scala/interop/singleton/objects/*.class
 
-run-companion-object: compile
-	lein run -m companion-object.clojure
+run-singleton-objects: compile
+	lein run -m singleton-objects.clojure
 
 show-object-members: compile
 	javap src/clojure/scala/interop/object/members/*.class
