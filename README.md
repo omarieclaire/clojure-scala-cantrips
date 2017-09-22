@@ -454,7 +454,7 @@ As demonstrated above the Clojure way of accessing the default value of a parame
 
 ## Case classes
 
-[Case classes](http://docs.scala-lang.org/tutorials/tour/case-classes.html) are another handy tool that is commonly used in Scala codebases. Scala provides a bunch of features to case classes for free. These include but not limited to; default apply and unapply methods, immutability, hashCode and equals implementations. Let’s inspect the Java interface of a case class to get the full list;
+[Case classes](http://docs.scala-lang.org/tutorials/tour/case-classes.html) are another handy tool that is commonly used in Scala codebases. Scala provides a bunch of features to case classes for free. These include but are not limited to: default apply and unapply methods, immutability, hashCode and equals implementations. Let’s inspect the Java interface of a case class to get the full list;
 
 *[case-classes.scala](src/case_classes/scala.scala)*
 ```scala
@@ -499,7 +499,7 @@ public class clojure.scala.interop.case.classes.TestClass implements scala.Produ
 For the sake of brevity, this documentation will focus on the parts that are interesting for a Clojure consumer. The interface a case class provides, mostly contains sugar methods that work well in a Scala codebase. Naturally in a Clojure codebase this interface does not bring many benefits. Some examples to these are;
 * `apply`: automatically invoked in Scala but not in Clojure. In Clojure code calling the apply method is not any simpler than calling the constructor or any other method, therefore it doesn’t bring any benefits.
 * `unapply`: useful for pattern matching in Scala, not applicable to Clojure.
-* `copy` : handy when the default parameter values are supported, doesn’t bring any benefits in Clojure.
+* `copy`: handy when the default parameter values are supported, doesn’t bring any benefits in Clojure.
 
 Let’s have a look at the code below to see what parts of this interface we can make use of from Clojure code;
 
