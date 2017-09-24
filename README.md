@@ -287,7 +287,7 @@ public final class clojure.scala.interop.singleton.objects.TestClass$ {
   public static clojure.scala.interop.singleton.objects.TestClass$ MODULE$;
   public static {};
 }
-Compiled from "scala.scala"
+
 public final class clojure.scala.interop.singleton.objects.TestClass {
 }
 ```
@@ -298,8 +298,8 @@ Scala doesn’t have static methods, its way of providing a similar functionalit
 
 *[singleton_objects.clj](src/singleton_objects/clojure.clj)* *`make run-singleton-objects`*
 ```clojure
-  (let [singleton-instance (TestClass$/MODULE$)]
-    (println singleton-instance)) ; #object[clojure.scala.interop.singleton.objects.TestClass$]
+(let [singleton-instance (TestClass$/MODULE$)]
+  (println singleton-instance)) ; #object[clojure.scala.interop.singleton.objects.TestClass$]
 
 ```
 
