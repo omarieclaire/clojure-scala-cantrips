@@ -446,7 +446,7 @@ Naturally the Java signature of the `sum` method doesn’t give any insight abou
   (println (.sum instance 30 default-argument)))) ; prints 40
 ```
 
-As demonstrated above the Clojure way of accessing the default value of a parameter is by calling its generated method. This is probably not more convenient than using a hardcoded parameter, however we need to keep in mind that the default values that are provided by a library may change over time.
+This demonstrates the Clojure way of accessing the default value of a parameter; using its generated method. This is probably not more convenient than using a hardcoded parameter, but would mean that changes over time in the default values that are provided by a library would be picked up.
 
 ## Case classes
 
