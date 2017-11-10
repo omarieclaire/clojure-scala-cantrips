@@ -37,7 +37,7 @@ The source code of all of the examples can be found in the [`src` directory](src
 make show-{{example-name}}
 ```
 
-To execute the Clojure code that uses this Java interface you can run;
+To execute the Clojure code that uses this Java interface, you can run;
 ```make
 make run-{{example-name}}
 ```
@@ -316,7 +316,7 @@ Trying to instantiate the `TestClass` without any arguments yields the error bel
 Caused by: java.lang.IllegalArgumentException: No matching ctor found for class clojure.scala.interop.objects.TestClass
 ```
 
-This shows that even the [default Java constructor](https://docs.oracle.com/javase/tutorial/java/javaOO/constructors.html) is not provided to this class. I don't know the reasoning behind this, and it is out of the scope of this documentation. *However, I am happy to hear if you know more about this.*
+The above example shows that even the [default Java constructor](https://docs.oracle.com/javase/tutorial/java/javaOO/constructors.html) is not provided to this class. I don't know the reasoning behind this, and it is out of the scope of this documentation. *However, I am happy to hear if you know more about this.*
 
 ## Class members of singleton objects
 
@@ -495,7 +495,7 @@ public class clojure.scala.interop.case.classes.TestClass implements scala.Produ
 For the sake of brevity, this documentation will focus on the parts that are interesting for a Clojure consumer. The interface a case class provides, mostly contains sugar methods that work well in a Scala codebase. Naturally in a Clojure codebase this interface does not bring many benefits. Some examples to these are;
 * `apply`: automatically invoked in Scala but not in Clojure. In Clojure code calling the apply method is not any simpler than calling the constructor or any other method, therefore it doesn’t bring any benefits.
 * `unapply`: useful for pattern matching in Scala, not applicable to Clojure.
-* `copy`: handy only when the language supports default parameter values. Otherwise, same functionality can be achieved using the constructor.
+* `copy`: handy only when the language supports default parameter values. Otherwise, the same functionality can be achieved using the constructor.
 
 Let’s have a look at the code below to see what parts of this interface we can make use of from Clojure code;
 
@@ -522,7 +522,7 @@ The code above demonstrates the usage of `toString` and `equals` methods. The in
 
 So far we applied the Clojure - Scala interop techniques to the classes that we have defined. Now let’s use our newly acquired powers on a class that comes with the Scala standard library.
 
-The `Option` class is one of the commonly used data structures that is provided by Scala standard library. When we look at the [source code of the `Option` class](https://github.com/scala/scala/blob/v2.12.1/src/library/scala/Option.scala#L11) we see that there are four main structures that holds it together. These are (simplified);
+The `Option` class is one of the commonly used data structures that is provided by Scala standard library. When we look at the [source code of the `Option` class](https://github.com/scala/scala/blob/v2.12.1/src/library/scala/Option.scala#L11) we see that there are four main structures that hold it together. These are (simplified);
 * object Option
 * sealed abstract class Option
 * final case class Some // extends Option abstract class
