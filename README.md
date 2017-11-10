@@ -1,6 +1,6 @@
 # Clojure-Scala Cantrips
 
-In this document I share tips and tricks on how to consume Scala APIs from Clojure codebases.
+In this document, I share tips and tricks on how to consume Scala APIs from Clojure codebases.
 
 ### Index
   * [Intro](#intro---lets-get-started)
@@ -20,7 +20,7 @@ In this document I share tips and tricks on how to consume Scala APIs from Cloju
 
 ## Intro - *let’s get started*
 
-Clojure and Scala, both being languages that run on JVM, have a common denominator. That is the Java bytecode. To use a Scala library from a Clojure code we need to know two things;
+Clojure and Scala, both being languages that run on JVM, have a common denominator. They share the Java bytecode. To use a Scala library from a Clojure code, we need to know two things;
   * What kind of a Java interface does this Scala code produce?
   * How do we consume a given Java interface in a Clojure code?
 
@@ -28,7 +28,7 @@ The first question can be answered by utilizing the [javap](http://docs.oracle.c
 
 #### Who is this document for?
 
-This document would be interesting for those who want to understand Scala to Java conversion and Clojure - Java interop. I'd highly encourage checking out the existing Scala - Clojure interop libraries. There are open source libraries out there that do a good job in providing the functionality covered here. This is an educational document for understanding the underlying semantics of Clojure - Scala interoperability.
+This document would be interesting for those who want to understand Scala to Java conversion and Clojure - Java interop. I  strongly encourage checking out the existing Scala - Clojure interop libraries. There are open source libraries out there that do a good job in providing the functionality covered here. This is an educational document for understanding the underlying semantics of Clojure - Scala interoperability.
 
 ## Prerequisites
 
@@ -37,12 +37,12 @@ The source code of all of the examples can be found in the [`src` directory](src
 make show-{{example-name}}
 ```
 
-In order to execute the Clojure code that uses this Java interface you can run;
+To execute the Clojure code that uses this Java interface you can run;
 ```make
 make run-{{example-name}}
 ```
 
-Running the examples requires Java, the Scala compiler (`scalac`) and the Clojure build tool Leiningen (`lein`) to be installed on the host machine. The examples are tested in the versions of these tools shown below;
+Running the examples requires Java, the Scala compiler (`scalac`) and the Clojure build tool Leiningen (`lein`) to be installed on the host machine. The examples are tested with the versions of these tools shown below;
 ```
 Scala compiler 2.12.1
 Leiningen 2.7.1
@@ -158,9 +158,9 @@ public class clojure.scala.interop.immutable.fields.TestClass {
 }
 ```
 
-From the above code, we can deduce that defining a `val` either in the constructor or in the class body doesn’t change the signature of the generated Java method. Both `attr1` and `attr2` have the same signature. Another noteworthy point is that Scala `val`s are turned into Java methods.
+From the above code we can deduce that defining a `val` either in the constructor or in the class body doesn’t change the signature of the generated Java method. Both `attr1` and `attr2` have the same signature. Another noteworthy point is that Scala `val`s are turned into Java methods.
 
-Let’s try to access these fields. Following the Clojure - Java interop accessing the methods looks like below;
+Let’s try to access these fields. Following the Clojure - Java interop accessing the method looks like the example below;
 
 *[immutable-fields.clj](src/immutable_fields/clojure.clj)* *`make run-immutable-fields`*
 ```clojure
@@ -211,7 +211,7 @@ What about mutating these fields? You probably noticed these weirdly named metho
 public void attr1_$eq(int);
 ```
 
-This is a method that takes an `int` and doesn’t return a value back. This is the setter method of the variable `attr1`, that lets us mutate its value. Let's see its usage below;
+This is a method that takes an `int` and doesn’t return a value back. This is the setter method of the variable `attr1`, that allows us to mutate its value. Let's see its usage below;
 
 *[mutable-fields.clj](src/mutable_fields/clojure.clj)* *`make run-mutable-fields`*
 ```clojure
@@ -316,7 +316,7 @@ Trying to instantiate the `TestClass` without any arguments yields the error bel
 Caused by: java.lang.IllegalArgumentException: No matching ctor found for class clojure.scala.interop.objects.TestClass
 ```
 
-This shows that even the [default Java constructor](https://docs.oracle.com/javase/tutorial/java/javaOO/constructors.html) is not provided to this class. I don't know the reasoning behind this and it is out of the scope of this documentation. *However, I am happy to hear if you know more about this.*
+This shows that even the [default Java constructor](https://docs.oracle.com/javase/tutorial/java/javaOO/constructors.html) is not provided to this class. I don't know the reasoning behind this, and it is out of the scope of this documentation. *However, I am happy to hear if you know more about this.*
 
 ## Class members of singleton objects
 
@@ -352,7 +352,7 @@ public final class clojure.scala.interop.object.members.TestClass {
 }
 ```
 
-Looking at the interface above, there are two ways of accessing the provided functionality; either using the static methods on `TestClass` or using the instance methods on `TestClass$`. As far as I tested either way results in identical outcomes. Even the mutable state is shared between these two classes, which would be the expectation of a consumer who is oblivious to the internals of Scala. This is demonstrated below;
+Looking at the interface above there are two ways of accessing the provided functionality; either using the static methods on `TestClass` or using the instance methods on `TestClass$`. As far as I tested either way results in identical outcomes. Even the mutable state is shared between these two classes, which would be the expectation of a consumer who is oblivious to the internals of Scala. This is demonstrated below;
 
 *[object-members.clj](src/object_members/clojure.clj)* *`make run-object-members`*
 ```clojure
@@ -446,11 +446,11 @@ Naturally the Java signature of the `sum` method doesn’t give any insight abou
   (println (.sum instance 30 default-argument)))) ; prints 40
 ```
 
-This demonstrates the Clojure way of accessing the default value of a parameter; using its generated method. This is probably not more convenient than using a hardcoded parameter but would mean that changes over time in the default values that are provided by a library would be picked up.
+The example above demonstrates the Clojure way of accessing the default value of a parameter; using its generated method. This is probably not more convenient than using a hardcoded parameter but would mean that changes over time in the default values that are provided by a library would be picked up.
 
 ## Case classes
 
-[Case classes](http://docs.scala-lang.org/tutorials/tour/case-classes.html) are another handy tool that is commonly used in Scala codebases. Scala provides a bunch of features to case classes for free. These include but are not limited to: default apply and unapply methods, immutability, hashCode and equals implementations. Let’s inspect the Java interface of a case class to get the full list;
+[Case classes](http://docs.scala-lang.org/tutorials/tour/case-classes.html) are another handy tool commonly used in Scala codebases. Scala provides a bunch of features to case classes for free. These include but are not limited to: default apply and unapply methods, immutability, hashCode, and equals implementations. Let’s inspect the Java interface of a case class to get the full list;
 
 *[case-classes.scala](src/case_classes/scala.scala)*
 ```scala
